@@ -4,13 +4,15 @@ import cv2
 
 
 def is_Grayscale(width, height, image):
+    a = 0
     for i in range (width):
         for j in range (height):
             r, g, b = image.convert('RGB').getpixel((i,j))
-            if (r == g == b):
-                return True
-    return False
-            
+            if (r != g != b):
+                return False
+    return True
+
+
 def grayscale(width, height, image):
     img = Image.new(im.mode, im.size)
     pixelsNew = img.load()
@@ -30,7 +32,7 @@ width, height = image_list[0].size
 
 print(is_Grayscale(width,height,image_list[0]))
 
-if(is_Grayscale(width,height,image_list[0]) == True):
+if(is_Grayscale(width,height,image_list[0]) != True):
     image_list[0] = grayscale(width, height, image_list[0])
 
 image_list[0].show()
