@@ -6,7 +6,6 @@ import matplotlib.pyplot
 import matplotlib.image
 
 def is_Grayscale(width, height, image):
-    a = 0
     for i in range (width):
         for j in range (height):
             r, g, b = image.convert('RGB').getpixel((i,j))
@@ -15,8 +14,13 @@ def is_Grayscale(width, height, image):
     return True
 
 
-def grayscale(image):
-    return np
+def grayscale(width, height, image):
+    for i in range (width):
+        for j in range (height):
+            r, g, b = image.convert('RGB').getpixel((i,j))
+            total = (r+g+b) / 3
+            image.putpixel((i,j), (int(total), int(total), int(total)))
+    return image
 
 image_list = []
 for filename in glob.glob('GetImage/*.jpg'):
@@ -25,12 +29,10 @@ for filename in glob.glob('GetImage/*.jpg'):
 
 width, height = image_list[0].size
 
-#print(image_list[0])
 
-print(is_Grayscale(width,height,image_list[0]))
 
 if(is_Grayscale(width,height,image_list[0]) != True):
-    image_list[0] = rgb2gray(image_list[0])
+    image_list[0] = grayscale(width, height, image_list[0])
 
 image_list[0].show()
 
