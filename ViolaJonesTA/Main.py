@@ -27,6 +27,7 @@ for filename in glob.glob('GetImage/*.jpg'):
     im=Image.open(filename)
     image_list.append(im)
 
+
 width, height = image_list[0].size
 
 
